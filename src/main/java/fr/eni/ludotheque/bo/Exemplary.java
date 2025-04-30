@@ -23,4 +23,8 @@ public class Exemplary {
     @NonNull
     @Column(nullable = false)
     private Boolean isRentable;
+
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
 }

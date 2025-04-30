@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -40,9 +42,12 @@ public class Game {
 
     @ManyToMany
     @JoinTable(
-            name = "JEUX_GENRES", // nom de la table de jointure
-            joinColumns = @JoinColumn(name = "jeu_id"), // clé étrangère vers Jeu
+            name = "GAMES_GENRES", // nom de la table de jointure
+            joinColumns = @JoinColumn(name = "game_id"), // clé étrangère vers Jeu
             inverseJoinColumns = @JoinColumn(name = "genre_id") // clé étrangère vers Genre
     )
     private Set<Genre> genres = new HashSet<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    private List<Exemplary> exemplaries = new ArrayList<>();
 }
