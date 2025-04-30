@@ -1,35 +1,50 @@
-# === Java & Gradle ===
-.gradle/
-build/
-out/
-!gradle/wrapper/gradle-wrapper.jar
-!gradle-wrapper.properties
+# Java et outils de build
+*.class
+*.jar
+*.war
+*.ear
 
-# === IntelliJ IDEA ===
+# Dossiers de compilation
+/target/
+/build/
+
+# Logs
+*.log
+
+# IntelliJ IDEA
 .idea/
-*.iws
 *.iml
-*.ipr
+out/
 
-# === OS Files ===
+# Eclipse
+.project
+.classpath
+.settings/
+.springBeans
+
+# VS Code
+.vscode/
+
+# Systèmes d'exploitation
 .DS_Store
 Thumbs.db
 
-# === Logs and temp ===
-*.log
-*.tmp
+# Fichiers de configuration sensibles
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+# Tests
+/test-output/
+/surefire-reports/
+
+# Git ignore temporaire
 *.swp
+*~
+*.tmp
 
-# === Eclipse (si jamais) ===
-.classpath
-.project
-.settings/
-
-# === Test Coverage & Reports ===
-*.exec
-jacoco.exec
-test-output/
-reports/
-
-# === Other ===
-*.class
+# Dépendances téléchargées (si jamais stockées localement)
+/.gradle/
+/mvnw
+/mvnw.cmd
