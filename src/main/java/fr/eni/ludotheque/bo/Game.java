@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -34,4 +37,12 @@ public class Game {
 
     @Column(nullable = false)
     private float pricePerDay;
+
+    @ManyToMany
+    @JoinTable(
+            name = "JEUX_GENRES", // nom de la table de jointure
+            joinColumns = @JoinColumn(name = "jeu_id"), // clé étrangère vers Jeu
+            inverseJoinColumns = @JoinColumn(name = "genre_id") // clé étrangère vers Genre
+    )
+    private Set<Genre> genres = new HashSet<>();
 }
