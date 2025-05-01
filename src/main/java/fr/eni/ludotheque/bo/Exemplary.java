@@ -25,6 +25,7 @@ public class Exemplary {
     private Boolean isRentable;
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(name = "game_id", nullable = false)
+    @NonNull
     private Game game;
 }

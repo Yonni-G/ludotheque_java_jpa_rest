@@ -25,4 +25,20 @@ public class Location {
     private Date returningDateAt;
     private Float dayPrice;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    // Peut être nul
+    @ManyToOne
+    @JoinColumn(name = "bill_id")
+    @Column(nullable = true)
+    private Bill bill;
+
+    // Ne peut pas être nul
+    @ManyToOne
+    @NonNull
+    @JoinColumn(name = "exemplary_id", nullable = false)
+    private Exemplary exemplary;
+
 }

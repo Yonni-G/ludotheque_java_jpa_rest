@@ -40,14 +40,18 @@ public class Game {
     @Column(nullable = false)
     private float pricePerDay;
 
+    // Optionnel. On décide de mettre une relation bidirectionnelle et qu'on peut avoir besoin de la liste des exemplaires depuis un jeu
+    // Si on efface un jeu, on efface ses exemplaires
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Exemplary> exemplaries = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "GAMES_GENRES", // nom de la table de jointure
             joinColumns = @JoinColumn(name = "game_id"), // clé étrangère vers Jeu
             inverseJoinColumns = @JoinColumn(name = "genre_id") // clé étrangère vers Genre
     )
-    private Set<Genre> genres = new HashSet<>();
+    private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    private List<Exemplary> exemplaries = new ArrayList<>();
+
 }
