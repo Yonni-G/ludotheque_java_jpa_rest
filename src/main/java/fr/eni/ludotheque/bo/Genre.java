@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +22,8 @@ public class Genre {
     @Column(nullable=false, length=50)
     private String libelle;
 
+    // Bidirection optionnelle
     @ManyToMany(mappedBy = "genres")
-    private Set<Game> games = new HashSet<>();
+    private List<Game> games = new ArrayList<>();
 
 }
