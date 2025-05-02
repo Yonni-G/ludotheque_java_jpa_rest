@@ -65,4 +65,26 @@ class CustomerServiceIntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("Modification adresse client cas positif")
+    public void testModifierAdresseClientCasPositif() {
+        //Arrange
+
+        // on créé un client avec son adresse de base
+        Address adresse = new Address("rue des Cormorans", "44860", "Saint Aignan Grand Lieu");
+        Customer customer = new Customer("n1", "p1", "e1", "0123456789", adresse);
+        Customer customerDB = customerRepository.save(customer);
+
+        // on cree la nouvelle adresse
+        Address addressNew = new Address("rue des Cormorans2", "44862", "2Saint Aignan Grand Lieu");
+
+        //Act
+        Customer customerSaved = customerService.setCustomerAddress(customerDB.getCustomerId(), addressNew);
+
+        //Assert
+        assertThat(customerSaved.getCustomerId()).isNotNull();
+        assertThat(customerSaved.getAddress().getPostalCode()).isEqualTo("44862");
+
+    }
+
 }

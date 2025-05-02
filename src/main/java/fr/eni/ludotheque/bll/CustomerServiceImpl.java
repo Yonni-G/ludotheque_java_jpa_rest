@@ -1,5 +1,6 @@
 package fr.eni.ludotheque.bll;
 
+import fr.eni.ludotheque.bo.Address;
 import fr.eni.ludotheque.bo.Customer;
 import fr.eni.ludotheque.dal.CustomerRepository;
 import fr.eni.ludotheque.dto.CustomerDTO;
@@ -30,6 +31,16 @@ public class CustomerServiceImpl implements CustomerService {
                     customer.setEmail(dto.getEmail());
                     customer.setPhone(dto.getPhone());
                     customer.setAddress(dto.getAddress());
+                    return customerRepository.save(customer);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Client pas trouvé avec l'id: " + id));
+    }
+
+    public Customer setCustomerAddress(Long id, Address address) {
+        return customerRepository.findById(id)
+                .map(customer -> {
+                    // MAJ de l'adresse
+                    customer.setAddress(address);
                     return customerRepository.save(customer);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Client pas trouvé avec l'id: " + id));
