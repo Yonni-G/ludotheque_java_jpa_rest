@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -48,7 +51,7 @@ class GameServiceTest {
 
     // TEST: Créer un jeu avec un ou plusieurs exemplaires
     @Test
-    void testGameWithExemplaries() {
+    void testCreateGameWithExemplaries() {
         Game mockGame = new Game("Test");
         when(gameRepository.save(mockGame)).thenReturn(mockGame);
 
@@ -79,7 +82,7 @@ class GameServiceTest {
 
     // TEST: Créer un jeu avec un ou plusieurs genres
     @Test
-    void testGameWithGenre() {
+    void testCreateGameWithGenre() {
         Game mockGame = new Game("Test");
         when(gameRepository.save(mockGame)).thenReturn(mockGame);
 
@@ -110,5 +113,39 @@ class GameServiceTest {
         verify(gameRepository, times(2)).save(mockGame);
         verify(genreRepository, times(1)).save(mockGenre1);
         verify(genreRepository, times(1)).save(mockGenre2);
+    }
+
+    @Test
+    public void testGetAllGamesWithExemplaries() {
+        Game mockGame = new Game("Test");
+        Game mockGame2 = new Game("Test2");
+
+        Exemplary mockExemplary1 = new Exemplary();
+        mockExemplary1.setBarcode(12345678912345L);
+        mockExemplary1.setIsRentable(true);
+        mockExemplary1.setGame(mockGame);
+        Exemplary mockExemplary2 = new Exemplary();
+        mockExemplary2.setBarcode(2345678912345L);
+        mockExemplary2.setIsRentable(true);
+        mockExemplary2.setGame(mockGame);
+        mockGame.getExemplaries().addAll(List.of(mockExemplary1, mockExemplary2));
+
+        Exemplary mockExemplary3 = new Exemplary();
+        mockExemplary3.setBarcode(2345678912345L);
+        mockExemplary3.setIsRentable(true);
+        mockExemplary3.setGame(mockGame2);
+        mockGame2.getExemplaries().add(mockExemplary3);
+
+        List<Game> gameList = List.of(mockGame, mockGame2);
+        when(gameRepository.findAll()).thenReturn(gameList);
+
+        List<Game> testGameList = gameService.getAllGames();
+        assertThat(testGameList).isNotNull();
+        assertThat(testGameList.size()).isEqualTo(2);
+
+        assertThat(mockGame.getExemplaries().size()).isEqualTo(2);
+        assertThat(mockGame2.getExemplaries().size()).isEqualTo(1);
+
+        verify(gameRepository, times(1)).findAll();
     }
 }
