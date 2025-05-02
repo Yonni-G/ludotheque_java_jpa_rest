@@ -6,6 +6,7 @@ import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.dal.ExemplaryRepository;
 import fr.eni.ludotheque.dal.GameRepository;
 import fr.eni.ludotheque.dal.GenreRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ class GameServiceTest {
     @Autowired
     private GenreService genreService;
 
-    // TEST: Créer un jeu
     @Test
+    @DisplayName("TEST: Créer un jeu")
     void createGame() {
         Game mockGame = new Game("Test");
 
@@ -49,8 +50,8 @@ class GameServiceTest {
         verify(gameRepository, times(1)).save(mockGame);
     }
 
-    // TEST: Créer un jeu avec un ou plusieurs exemplaires
     @Test
+    @DisplayName("TEST: Créer un jeu avec un ou plusieurs exemplaires")
     void testCreateGameWithExemplaries() {
         Game mockGame = new Game("Test");
         when(gameRepository.save(mockGame)).thenReturn(mockGame);
@@ -80,8 +81,8 @@ class GameServiceTest {
         verify(gameRepository, times(2)).save(mockGame);
     }
 
-    // TEST: Créer un jeu avec un ou plusieurs genres
     @Test
+    @DisplayName("TEST: Créer un jeu avec un ou plusieurs genres")
     void testCreateGameWithGenre() {
         Game mockGame = new Game("Test");
         when(gameRepository.save(mockGame)).thenReturn(mockGame);
@@ -116,6 +117,7 @@ class GameServiceTest {
     }
 
     @Test
+    @DisplayName("TEST: Obtenir la liste des jeux avec leurs exemplaires")
     public void testGetAllGamesWithExemplaries() {
         Game mockGame = new Game("Test");
         Game mockGame2 = new Game("Test2");
