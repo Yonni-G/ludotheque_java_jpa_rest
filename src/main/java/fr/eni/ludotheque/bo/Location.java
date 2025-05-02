@@ -31,13 +31,11 @@ public class Location {
 
     // Peut être nul
     @ManyToOne
-    @JoinColumn(name = "bill_id")
-    @Column(nullable = true)
+    @JoinColumn(name = "bill_id", nullable = true)
     private Bill bill;
 
     // Ne peut pas être nul
     @ManyToOne
-    @NonNull
     @JoinColumn(name = "exemplary_id", nullable = false)
     private Exemplary exemplary;
 

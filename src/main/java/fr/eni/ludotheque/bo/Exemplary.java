@@ -26,6 +26,5 @@ public class Exemplary {
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
-    @NonNull
     private Game game;
 }
