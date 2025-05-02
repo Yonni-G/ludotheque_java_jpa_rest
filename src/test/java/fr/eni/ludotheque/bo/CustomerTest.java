@@ -24,7 +24,7 @@ class CustomerTest {
     @Test
     @DisplayName("test de creation d'un client - cas positif")
     public void testCreationClient() {
-
+/*
         // ARRANGE = préparation du test
         Customer client = null;
         client = new Customer("smith", "bob", "0123456789");

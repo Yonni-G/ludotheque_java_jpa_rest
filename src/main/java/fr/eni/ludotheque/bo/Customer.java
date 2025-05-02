@@ -25,12 +25,14 @@ public class Customer {
     @Column(nullable=false, length=50)
     private String email;
 
+    @NonNull
     @Column(length=10, unique=true)
     private String phone;
 
     // On créé la relation OneToOne UNIDIRECTIONNELLE entre Customer et Address
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
+    @NonNull
     private Address address;
 
 }
