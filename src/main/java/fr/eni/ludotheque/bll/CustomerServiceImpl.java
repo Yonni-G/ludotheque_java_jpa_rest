@@ -7,6 +7,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
@@ -33,5 +35,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new EntityNotFoundException("Client pas trouvé avec l'id: " + id));
     }
 
+    public List<Customer> getCustomersByLastNameStartingWith(String prefix){
+        return customerRepository.findByLastNameStartingWith(prefix);
+    }
 
 }
