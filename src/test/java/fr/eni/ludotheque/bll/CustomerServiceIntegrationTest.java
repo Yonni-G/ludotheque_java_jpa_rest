@@ -54,7 +54,6 @@ class CustomerServiceIntegrationTest {
     @DisplayName("Modification infos client cas négatif (client non-trouvé)")
     public void testModifierInfosClientCasNegatif() {
         //Arrange
-
         Long nonExistentId = 99L;
 
         // on cree un clientDTO avec les nouvelles infos
