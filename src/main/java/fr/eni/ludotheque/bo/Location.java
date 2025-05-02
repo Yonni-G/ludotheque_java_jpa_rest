@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -20,9 +20,9 @@ public class Location {
 
     @NonNull
     @Column(nullable=false)
-    private Date startingDateAt;
+    private LocalDate startingDateAt;
     
-    private Date returningDateAt;
+    private LocalDate returningDateAt;
     private Float dayPrice;
 
     @ManyToOne

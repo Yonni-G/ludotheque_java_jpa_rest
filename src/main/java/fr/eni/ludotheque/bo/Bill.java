@@ -15,4 +15,6 @@ public class Bill {
     private Long billId;
 
     private Date paidAt;
+
+    private float amount;
 }
