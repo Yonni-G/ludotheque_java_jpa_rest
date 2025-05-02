@@ -11,9 +11,12 @@ class ExemplaryTest {
 
     @Test
     void createExemplary() {
+
         Exemplary exemplary = new Exemplary(123456789123L, true);
+
 
         assertThat(exemplary).isNotNull();
         assertThat(exemplary.getBarcode()).isEqualTo(123456789123L);
+
     }
 }

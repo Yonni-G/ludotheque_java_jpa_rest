@@ -36,7 +36,6 @@ public class Location {
 
     // Ne peut pas être nul
     @ManyToOne
-    @NonNull
     @JoinColumn(name = "exemplary_id", nullable = false)
     private Exemplary exemplary;
 
